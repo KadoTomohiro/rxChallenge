@@ -1,6 +1,6 @@
 import {Component} from 'angular2/core';
-import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
-
+import {RouteConfig, Route, Redirect, ROUTER_DIRECTIVES} from 'angular2/router';
+import {Simple} from './components/simple/simple';
 
 @Component({
   selector: 'rx-challenge-app',
@@ -10,7 +10,8 @@ import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
   pipes: []
 })
 @RouteConfig([
-
+  new Redirect({path: '/', redirectTo: ['/simple'] }),
+  new Route({path: '/simple', name: 'Simple', component: Simple, useAsDefault: true})
 ])
 export class RxChallengeApp {
   defaultMeaning: number = 42;
