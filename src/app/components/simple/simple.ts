@@ -14,12 +14,19 @@ export class Simple {
 
   numberStream: Observable<number>;
 
+  raw: number[];
+
   numbers: number[];
 
   total: number;
 
   constructor() {
+    this.raw = [];
+
     this.numberStream = Rx.Observable.range(0,10);
+
+    this.numberStream
+      .subscribe(n => this.raw.push(n));
 
     this.numberStream
       .filter(n => n % 3 === 0)
@@ -30,6 +37,7 @@ export class Simple {
     this.numberStream
       .scan((sum: number, n: number) => sum + n)
       .subscribe((total: number) => this.total = total);
-  }
 
+
+  }
 }
